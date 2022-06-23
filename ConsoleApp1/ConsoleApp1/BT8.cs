@@ -6,80 +6,99 @@ using System.Threading.Tasks;
 
 namespace BaiTap
 {
-    class circle
-    {
-        private double r;
-        public double R //Cai nay la de bat buoc r>0
-        {
-            get { return r; }
 
+    class NuocGiaiKhat 
+    {
+        //Khai bao 
+        string name, unit;
+        int amount;
+        double prices;
+        public static double vat_tax= 0.1; //Tax nay dung static vi no khong thay doi 
+        //set property
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public string Unit //Set property cho Unit, chi nhan 4 gia tri
+        {
+            get { return unit; }
             set
             {
-                if (value < 0)
+                if(value=="ket")
                 {
-                    Console.WriteLine("Du lieu bi loi");
-                    r = 0;
+                    unit = value;
+                }
+                else if(value=="thung")
+                {
+                    unit=value;
+                }
+                else if(value=="chai")
+                {
+                    unit = value;
+                }
+                else if(value=="lon")
+                {
+                    unit = value;
                 }
                 else
                 {
-                    r = value;
+                    Console.WriteLine("Du lieu nhap vao sai !");
+                    unit = "Invalid";
                 }
-
             }
         }
-        public circle() // Khoi tao khong tham so 
+        public int Amount //Set property cho Amount khong duoc be hon 0
         {
-            this.r = 0;
+            get { return amount; }
+            set {
+                if (value < 0)
+                {
+                    Console.WriteLine("Du lieu bi sai !");
+                    amount = 0;
+                }
+                else
+                    amount = value;
+
+                 }
         }
-        public circle(double r) // Khoi tao co tham so 
+        public double Prices //Set property cho price khong <0
         {
-            this.r = r;
+            get { return prices; }
+            set { if (value < 0)
+                {
+                    Console.WriteLine("Du lieu bi loi !");
+                    prices = 0;
+                }
+                else
+                    prices = value;
+            }
         }
-        public circle(circle circle) //Khoi tao theo phuong thuc sao chep 
+         //-------------------------Ham khoi tao-------------------
+        public NuocGiaiKhat()
         {
-            this.r = circle.r;
+            Name= Unit = "";
+            Amount = 0;
+            Prices = 0;
         }
-
-
-
-        public void input() // input method 
+        public NuocGiaiKhat(string name, string unit, int amount, double prices)
         {
-            Console.Write("Nhap vao ban kinh hinh tron :");
-            this.r = double.Parse(Console.ReadLine());
+            this.Name = name;
+            this.Unit = unit;
+            this.Amount = amount;
+            this.Prices = prices;
+            
         }
-
-
-
-        public double tinhChuvi() // Tinh chu vi hinh tron r*2*PI
+        public NuocGiaiKhat(NuocGiaiKhat a)
         {
-            return this.r * 2 * Math.PI;
+            Name = a.Name;
+            Unit = a.Unit;
+            Amount = a.Amount;
+            Prices = a.Prices;
         }
-        public double tinhDientich() //Tinh dien tich;
-        {
-            return Math.Pow(this.r, 2) * Math.PI;
-        }
-
-
-
-        public void Output()
-        {
-            Console.WriteLine("Hinh tron co dien tich {0:0.00} Chu vi {1:0.00}", tinhDientich(), tinhChuvi());
-        }
+        //-----------------------------Ham Xu Li-------------------------
 
     }
-    class program
-    {
-        static void Main(string[] args)
-        {
-            //Phuong thuc khoi tao khong khai bao
-            circle a = new circle();
-            a.input();
-            a.Output();
-            //Phuong thuc khoi tao co khai bao
-            circle b = new circle(5.0f);
-            Console.WriteLine("Chu vi hinh tron b la : {0} dien tich la : {1}", b.tinhChuvi(), b.tinhDientich());
-            Console.ReadLine();
-        }
-    }
+    class program { }
 
 }
